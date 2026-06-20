@@ -1,0 +1,28 @@
+# Downloaded audio
+data/
+*.wav
+*.mp3
+*.m4a
+*.opus
+*.webm
+*.ogg
+download_log.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.env
+
+# Jupyter / Colab
+.ipynb_checkpoints/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Colab local paths (if copied locally)
+checkpoints/
+processed_audio/
