@@ -12,23 +12,18 @@ Designed for long-form speech (audiobooks, podcasts, playlists) at scale (100+ h
 |---|---|
 | **Input** | ▶️ [A JOKE by Anton Chekhov — FULL AudioBook](https://www.youtube.com/watch?v=hBsY6-xAj1o) (YouTube, CC BY) |
 | **Output** | 🤗 [ulaspolat/tts-dataset-example](https://huggingface.co/datasets/ulaspolat/tts-dataset-example) on Hugging Face |
-| **Stats** | 60 segments · 27.4 MB · 24 kHz mono WAV |
 
 ---
 
 ## Pipeline overview
 
 ```mermaid
-flowchart LR
-  A[YouTube / local audio] --> B[youtube_audio_downloader]
-  B --> C["./data (local WAV)"]
-  C --> D[Upload to Google Drive]
-  D --> E[batch_process.ipynb]
-  E --> F["segments/partN"]
-  F --> G[merge_segment_parts.ipynb]
-  G --> H["segments/all_files"]
-  H --> I[normalization_and_hf_push.ipynb]
-  I --> J[Hugging Face Dataset]
+flowchart TD
+  A[YouTube / Local Audio] --> B[youtube_audio_downloader\nDownload mono WAV]
+  B --> C[batch_process.ipynb\nVAD · Whisper · Segment]
+  C --> D[merge_segment_parts.ipynb\nCombine parts]
+  D --> E[normalization_and_hf_push.ipynb\nNormalize · Upload]
+  E --> F[Hugging Face Dataset]
 ```
 
 | Step | Where | What happens |
