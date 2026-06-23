@@ -6,6 +6,16 @@ Designed for long-form speech (audiobooks, podcasts, playlists) at scale (100+ h
 
 ---
 
+## Example
+
+| | |
+|---|---|
+| **Input** | ▶️ [A JOKE by Anton Chekhov — FULL AudioBook](https://www.youtube.com/watch?v=hBsY6-xAj1o) (YouTube, CC BY) |
+| **Output** | 🤗 [ulaspolat/tts-dataset-example](https://huggingface.co/datasets/ulaspolat/tts-dataset-example) on Hugging Face |
+| **Stats** | 60 segments · 27.4 MB · 24 kHz mono WAV |
+
+---
+
 ## Pipeline overview
 
 ```mermaid
@@ -175,6 +185,19 @@ AUDIO_SOURCE_MODE = "all_files"
 Get a token at [huggingface.co/settings/tokens](https://huggingface.co/settings/tokens).
 
 The HF processing step uses **checkpoints** — if Colab disconnects, re-run from the processing cell and it resumes.
+
+---
+
+## Models & language support
+
+| Component | Model | Notes |
+|-----------|-------|-------|
+| Voice activity detection | [Silero VAD](https://github.com/snakers4/silero-vad) | Language-agnostic |
+| Speech transcription | [faster-whisper](https://github.com/SYSTRAN/faster-whisper) `large-v3` | 99 languages via ISO 639-1 code |
+| Number-to-words normalization | [num2words](https://github.com/savoirfairelinux/num2words) | 50+ languages |
+| Audio resampling & loudness | torchaudio + EBU R128 | Target: 24 kHz, −23 LUFS |
+
+Whisper `large-v3` supports 99 languages out of the box — set `WHISPER_LANGUAGE` to any [ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) (e.g. `"en"`, `"de"`, `"fr"`, `"tr"`, `"zh"`, `"ja"`). Match `NORMALIZE_LANG` in the normalization notebook to the same language for correct number-to-words conversion.
 
 ---
 
