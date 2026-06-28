@@ -1,6 +1,6 @@
 # YouTube audio downloader
 
-Local step of the [TTS dataset pipeline](../README.md): download YouTube video or playlist audio as **mono WAV** files (default **24 kHz**), for TTS dataset preparation.
+Local step of the [TTS dataset pipeline](../README.md): download YouTube video or playlist audio as **WAV** files (default **mono, 24 kHz** — both configurable), for TTS dataset preparation.
 
 ```bash
 cd youtube_audio_downloader

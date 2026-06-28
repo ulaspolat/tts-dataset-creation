@@ -19,16 +19,16 @@ Designed for long-form speech (audiobooks, podcasts, playlists) at scale (100+ h
 
 ```mermaid
 flowchart TD
-  A[YouTube / Local Audio] --> B[youtube_audio_downloader\nDownload mono WAV]
-  B --> C[batch_process.ipynb\nVAD · Whisper · Segment]
-  C --> D[merge_segment_parts.ipynb\nCombine parts]
-  D --> E[normalization_and_hf_push.ipynb\nNormalize · Upload]
+  A[YouTube / Local Audio] --> B["youtube_audio_downloader<br/>Download WAV"]
+  B --> C["batch_process.ipynb<br/>VAD · Whisper · Segment"]
+  C --> D["merge_segment_parts.ipynb<br/>Combine parts"]
+  D --> E["normalization_and_hf_push.ipynb<br/>Normalize · Upload"]
   E --> F[Hugging Face Dataset]
 ```
 
 | Step | Where | What happens |
 |------|--------|----------------|
-| 1 | Local | Download mono WAV files with `youtube_audio_downloader` |
+| 1 | Local | Download WAV files with `youtube_audio_downloader` |
 | 2 | Google Drive | Upload raw audio under `PROJECT_DIR/data/partN` |
 | 3 | Colab | **batch_process** — VAD + Whisper → short segments (`1.wav` / `1.txt`) |
 | 4 | Colab | **merge_segment_parts** — combine parts into one renumbered folder |
@@ -45,6 +45,8 @@ tts-dataset-creation/
 ├── youtube_audio_downloader/          ← Step 1: local audio download
 │   ├── download_single_audio.py
 │   ├── download_playlist_audio.py
+│   ├── audio_utils.py
+│   ├── requirements.txt
 │   └── README.md
 ├── notebooks/                   ← Step 2–5: Colab notebooks
 │   ├── batch_process.ipynb
@@ -219,5 +221,7 @@ After the full pipeline, the Hugging Face dataset contains:
 ---
 
 ## License
+
+This project is licensed under the MIT License — see [LICENSE](LICENSE) for details.
 
 Use this pipeline responsibly. You are responsible for complying with copyright and platform terms when downloading and publishing audio data.
